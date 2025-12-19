@@ -9,15 +9,18 @@ from models import db, User
 def test_soft_delete():
     client = app.test_client()
 
+    # Create user
     with app.app_context():
         user = User(name="Saif")
         db.session.add(user)
         db.session.commit()
         user_id = user.id
 
-    response = client.get(f"/delete/{user_id}")
+    # ❗ USE DELETE (NOT GET)
+    response = client.delete(f"/delete/{user_id}")
     assert response.status_code == 200
 
+    # Verify soft delete
     with app.app_context():
         deleted_user = User.query.get(user_id)
         assert deleted_user.is_deleted is True
