@@ -1,4 +1,4 @@
-name: Flask Soft Delete CI/CD
+name: Flask Soft Delete CI
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Setup Python
@@ -18,10 +18,10 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: |
         pip install -r requirements.txt
 
-    - name: Run Tests
+    - name: Run tests
       run: |
         pytest
